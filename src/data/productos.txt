@@ -1,0 +1,22 @@
+[
+  {
+    "nombre": "clavos",
+    "descripcion": "",
+    "precio": 8000,
+    "stock": 50,
+    "fotoUrl": "https://img.freepik.com/vector-gratis/diseno-etiqueta-martillo-garra-aislado_1308-61820.jpg?w=2000",
+    "codigo": "5500",
+    "id": 1,
+    "timestamp": 1669265327222
+  },
+  {
+    "nombre": "Martillo",
+    "descripcion": "",
+    "precio": 1000,
+    "stock": 100,
+    "fotoUrl": "https://img.freepik.com/vector-gratis/diseno-etiqueta-martillo-garra-aislado_1308-61820.jpg?w=2000",
+    "codigo": "2222",
+    "id": 2,
+    "timestamp": 1669265656804
+  }
+]
