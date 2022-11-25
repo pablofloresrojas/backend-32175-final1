@@ -1,6 +1,12 @@
 # backend-32175-final1
+<p align="left">
+  <img src="https://img.shields.io/badge/STATUS-EN%20DESAROLLO-green">
+</p>
+Primer avance entregable del proyecto final del curso de backend nodejs
 
-# para transpilar ejecute "npm run build"
-# para iniciar ejecute "npm start"
+# Iniciar Proyecto :wrench:
+Para transpilar ejecute "npm run build"
+Para iniciar ejecute "npm start"
 
-# En el archivo "CoderFinal1.postman_collection.json" encontrará las pruebas realizadas a través de Postman
+# Pruebas Postman :clipboard:
+En el archivo "CoderFinal1.postman_collection.json" encontrará las pruebas realizadas a través de Postman
