@@ -33,8 +33,8 @@ export class Carrito {
                 await fs.promises.writeFile(path.join(__dirname) + this.filename, JSON.stringify([carrito],null,2));                
             }
             return carrito;
-        } catch (error) {
-            throw new Error("Error al crear el carrito");
+        } catch (error:any) {
+            throw new Error(error.message);
         }
     }
 
@@ -47,8 +47,8 @@ export class Carrito {
                 await fs.promises.writeFile(path.join(__dirname) + this.filename, JSON.stringify(carritos,null,2));
                 return `Carrido ID=${id} ha sido eliminado de la base de datos`;
             }
-        } catch (error) {
-            throw new Error(`Error al eliminar el carrito ID=${id}`);
+        } catch (error:any) {
+            throw new Error(error.message);
         }
     }
 
@@ -60,10 +60,10 @@ export class Carrito {
                 const carritos = JSON.parse(contenido);
                 return carritos;
            }else{
-                return "No hay carritos en la base de datos";
+                return [];
            }
-        } catch (error) {
-            throw {status:400,message:"Error al leer el archivo"};
+        } catch (error:any) {
+            throw new Error(error.message);
         }
     }
 
@@ -80,15 +80,25 @@ export class Carrito {
             }
 
             let prods:any[]=[]
-            await Promise.all(carritos[idx].productos.map( (idProd)=>{
-                    const prod = productos.getById(idProd).then(r=>r.data).catch(error=>console.log(error))
-                    prods.push(prod)
-                    return prod
-            })).then(data=>prods=data);
-
+            await Promise.all(carritos[idx].productos.map( async (idProd)=>{
+                    try {
+                        const prod = await productos.getById(idProd)//.then(r=>r.data).catch(error=>{console.log("errooooor",error)})
+                        console.log(`producto para agregar (${idProd}): `,prod)
+                        prods.push(prod)
+                        return prod
+                    } catch (error:any) {
+                        console.log("errooooooorrrr:",error)
+                        throw new Error(error.message)
+                    }
+                    
+            })).then(data=>{
+                console.log("entrando en then para asignar prods: ",data)
+                prods=data
+            });
+            console.log("prods: ",prods)
             return prods;
-        } catch (error) {
-            throw new Error("Error al consultar la base de datos");
+        } catch (error:any) {
+            throw new Error(error.message);
         }
     }
 
@@ -107,10 +117,10 @@ export class Carrito {
             carritos[idx].productos.push(data.id_prod);
             await fs.promises.writeFile(path.join(__dirname) + this.filename, JSON.stringify(carritos,null,2));
 
-            return `El producto ID=${data.id_prod} ha sidp agregado al carrito id=${idx}`;
+            return `El producto ID=${data.id_prod} ha sido agregado al carrito id=${data.id}`;
             
         } catch (error:any) {
-            throw new Error(`Error al agregar el producto ID=${data.id_prod} al carrito`);
+            throw new Error(error.message);
         }
     }
 
@@ -133,7 +143,7 @@ export class Carrito {
             return `Producto ID=${data.id_prod} ha sido eliminado del carrito`;
             
         } catch (error:any) {
-            throw new Error(`Error al quitar producto ID=${data.id_prod} del carrito`);
+            throw new Error(error.message);
         }
     }
 

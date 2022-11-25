@@ -14,7 +14,7 @@ export class Producto {
 
     async save(producto:any){
         try {
-
+            // esta condicion como se puede hacer de mejor forma??
             if(instanceOf<typeProducto>(producto,"nombre") &&
                instanceOf<typeProducto>(producto,"descripcion") &&
                instanceOf<typeProducto>(producto,"codigo") &&
@@ -100,7 +100,7 @@ export class Producto {
             if(producto)
                 return producto;
             else
-                return `Producto ID=${id}no encontrado`;
+                return `Producto ID=${id} no encontrado`;
         } catch (error:any) {
             throw new Error(error.message);
         }
@@ -114,15 +114,6 @@ export class Producto {
             return `Producto ID=${id} ha sido eliminado de la base de datos`;
         } catch (error:any) {
             throw new Error(error.message);
-        }
-    }
-
-    async deleteAll(){
-        try {
-            await fs.promises.writeFile(path.join(__dirname) + this.filename, JSON.stringify([],null,2));
-            return "Se han eliminado todos los productos de la base de datos";
-        } catch (error) {
-            return "error al eliminar los productos de la base de datos";
         }
     }
 

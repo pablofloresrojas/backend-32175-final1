@@ -4,7 +4,7 @@ import { Producto } from "../controllers/productos.class.js";
 export const routerProductos = Router();
 const productos = new Producto("productos.txt");
 
-const isAdmin=false;
+const isAdmin=true;
 
 routerProductos.get("/",async(req:Request,res:Response)=>{
     try {
